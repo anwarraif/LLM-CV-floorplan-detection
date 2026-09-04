@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-red: #8B1A1A;
+  --color-brand-red-mid: #C0392B;
+  --color-brand-red-light: #F5E8E8;
+  --color-brand-gray: #4A4A4A;
+  --color-brand-gray-light: #F5F5F5;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile-first: center app with max-width 430px */
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 430px;
+  margin: 0 auto;
+  background: #ffffff;
+  position: relative;
+}
+
+/* Dark charcoal header — used by TopBar and login page */
+.app-header {
+  background-color: #4A4A4A;
+  flex-shrink: 0;
+}
+
+/* Apartment detail page — responsive layout */
+.apt-detail-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* mobile: no overflow clip — let the page scroll naturally */
+}
+.apt-detail-versions {
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  padding: 12px 8px;
+}
+.apt-detail-canvas {
+  flex: 1;
+  padding: 20px 24px;
+}
+@media (min-width: 768px) {
+  .apt-detail-layout {
+    flex-direction: row;
+    overflow: hidden; /* desktop: contain both panels */
+  }
+  .apt-detail-versions {
+    width: 200px;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+  }
+  .apt-detail-canvas {
+    overflow: auto; /* desktop: independent scroll */
+  }
+}
+
+/* Versions list — animated collapse/expand */
+.versions-list {
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.versions-list.open {
+  max-height: 500px;
+  opacity: 1;
+}
+.versions-list.closed {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Remove number input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
